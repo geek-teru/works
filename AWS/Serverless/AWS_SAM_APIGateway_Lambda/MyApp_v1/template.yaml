@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  MyApp - A sample SAM template to store and query budget data.
+
+Resources:
+  MyBudgetTable:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      TableName: BudgetTable
+      AttributeDefinitions:
+        - AttributeName: Category
+          AttributeType: S
+        - AttributeName: Timestamp
+          AttributeType: N
+        - AttributeName: Amount
+          AttributeType: N
+      KeySchema:
+        - AttributeName: Category
+          KeyType: HASH
+        - AttributeName: Timestamp
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  BudgetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.11
+      CodeUri: app/
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref MyBudgetTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MyBudgetTable
+      Events:
+        BudgetAPI:
+          Type: Api
+          Properties:
+            Path: /budget
+            Method: post
+
+Outputs:
+  BudgetApiUrl:
+    Description: "API Gateway endpoint URL for BudgetFunction"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/budget"

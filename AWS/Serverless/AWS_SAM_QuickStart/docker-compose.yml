@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  awssam:
+    build: ./image
+    image: awssam:latest
+    container_name: awssam.local
+    volumes:
+      - ./work:/work
+    working_dir: /work
+    tty: true
