@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  lang_go:
+    image: golang:latest
+    container_name: go.local
+    volumes:
+      - .:/work
+    working_dir: /work
