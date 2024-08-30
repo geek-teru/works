@@ -1,0 +1,30 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "",
+        "Effect": "Deny",
+        "Principal": "*",
+        "Action": [
+          "s3:ListBucket",
+          "s3:DeleteObject",
+          "s3:GetObject",
+          "s3:PutObject"
+        ],
+        "Resource": [
+          "${bucket_arn}",
+          "${bucket_arn}/*"
+        ],
+        "Condition": {
+          "StringNotLike": {
+            "aws:userid": [
+                "${admin_role_id}:*",
+                "${developer_role_id}:*",
+                "${operator_role_id}:*",
+                "${iam_user_id}:*"
+            ]
+          }
+        }
+      }
+    ]
+  }
