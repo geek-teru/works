@@ -19,37 +19,37 @@ https://roadmap.sh/
 * Git
 * GitHub
 
-## 6.Containers
+## 5.Containers
 * Docker , DockerCompose
 
-## 7.Setting up
+## 6.Setting up
 * Nginx
 
-## 8.Networking Protocols
+## 7.Networking Protocols
 * SSH
 * DNS
 * HTTP/HTTPS
 
-## 9.Cloud Providers
+## 8.Cloud Providers
 * AWS
 
-## 10.Serverless
+## 9.Serverless
 * Lambda
 
-## 11.Infrastructure Provisioning
+## 10.Infrastructure Provisioning
 * Terraform
 
-## 12.Configuration Management
+## 11.Configuration Management
 * Ansible
 
-## 13.CI/CD & Secret Management
+## 12.CI/CD & Secret Management
 * GitHub Actions
 * AWS Secret Manager
 
-## 15.Infrastructure Monitoring
+## 13.Infrastructure Monitoring
 * CloudWatch
 
-## 16.Logs Management
+## 14.Logs Management
 * Fluentd
 * S3 + GlueDataCatalog
 * Athena
