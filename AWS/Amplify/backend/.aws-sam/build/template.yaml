@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  CognitoUserPoolArn:
+    Type: String
+    Default: arn:aws:cognito-idp:ap-northeast-1:123456789012:userpool/ap-northeast-1_abcdefghi
+Resources:
+  UserApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      Auth:
+        DefaultAuthorizer: CognitoAuthorizer
+        Authorizers:
+          CognitoAuthorizer:
+            UserPoolArn:
+              Ref: CognitoUserPoolArn
+            Identity:
+              Header: Authorization
+              ValidationExpression: Bearer .*
+            AuthType: COGNITO_USER_POOLS
+  GetUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: GetUserFunction
+      Handler: get_user.lambda_handler
+      Runtime: python3.11
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: UserApi
+            Path: /user
+            Method: get
+            Auth:
+              Authorizer: CognitoAuthorizer
+    Metadata:
+      SamResourceId: GetUserFunction
+Outputs:
+  ApiUrl:
+    Description: API Gateway endpoint URL
+    Value:
+      Fn::Sub: https://${UserApi}.execute-api.${AWS::Region}.amazonaws.com/dev/

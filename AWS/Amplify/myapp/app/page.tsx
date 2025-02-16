@@ -1,10 +1,13 @@
 'use client'
 
 import React from 'react'
-import { Authenticator } from '@aws-amplify/ui-react'
+import { Authenticator, View } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 import { Amplify } from 'aws-amplify'
-import { UserInfoForm } from './components/UserInfoForm'
+import { Header } from './components/Header'
+import { Navigation } from './components/Navigation'
+import { API } from 'aws-amplify'
+import { Auth } from 'aws-amplify'
 
 // Cognitoの設定
 Amplify.configure({
@@ -25,6 +28,20 @@ Amplify.configure({
   }
 })
 
+// API呼び出し例
+const callApi = async () => {
+  try {
+    const response = await API.get('MyApi', '/path', {
+      headers: {
+        Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`
+      }
+    })
+    console.log(response)
+  } catch (error) {
+    console.error('Error calling API:', error)
+  }
+}
+
 export default function Home() {
   const handleFormSubmit = (formData: any) => {
     console.log('Form data:', formData)
@@ -33,13 +50,26 @@ export default function Home() {
   return (
     <Authenticator>
       {({ signOut, user }) => (
-        <div>
-          <h1>MyApp {user?.username}</h1>
-          <UserInfoForm onSubmit={handleFormSubmit} />
-          <button onClick={signOut}>サインアウト</button>
-          
-          {/* ここにTodoリストなどのメインコンテンツを追加 */}
-        </div>
+        <View>
+          <Header 
+            username={user?.username}
+            onSignOut={signOut}
+          />
+          <View 
+            display="flex"
+            paddingTop="64px"
+          >
+            <Navigation onFormSubmit={handleFormSubmit} />
+            <View 
+              flex="1"
+              padding="2rem"
+              backgroundColor="#f5f5f5"
+              height="calc(100vh - 64px)"
+            >
+              {/* メインコンテンツはここに追加 */}
+            </View>
+          </View>
+        </View>
       )}
     </Authenticator>
   )

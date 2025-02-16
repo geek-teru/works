@@ -12,7 +12,7 @@
 npm install aws-amplify @aws-amplify/ui-react next react react-dom
 npm install --save-dev typescript @types/react @types/react-dom @types/node
 
-# 以下でpackage.jsonの
+# 以下でpackage.jsonのパッケージをインストール
 npm install
 ```
 
@@ -40,4 +40,4 @@ myapp/
 ## 6. Amplifyコンソールでの設定
 - 新しいアプリケーションの作成
 - リポジトリの連携
-- 環境変数の設定：`AMPLIFY_MONOREPO_APP_ROOT=works/AWS/Amplify/myapp`
+- 環境変数の設定：`AMPLIFY_MONOREPO_APP_ROOT=AWS/Amplify/myapp`
