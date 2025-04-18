@@ -1,0 +1,51 @@
+Task:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+      minimum: 0
+    title:
+      type: string
+    description:
+      type: string
+    due_date:
+      type: string
+      format: date
+    status:
+      type: integer
+      description: 0=TODO, 1=IN_PROGRESS, 2=DONE
+    user_id:
+      type: integer
+      format: int64
+      minimum: 0
+    created_at:
+      type: string
+      format: date-time
+    updateded_at:
+      type: string
+      format: date-time
+    deleted_at:
+      type: string
+      format: date-time
+
+TaskInput:
+  type: object
+  required:
+    - title
+    - status
+    - user_id
+  properties:
+    title:
+      type: string
+    description:
+      type: string
+    due_date:
+      type: string
+      format: date
+    status:
+      type: integer
+    user_id:
+      type: integer
+      format: int64
+      minimum: 0

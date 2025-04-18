@@ -1,0 +1,36 @@
+User:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+      minimum: 0
+    name:
+      type: string
+    email:
+      type: string
+    password:
+      type: string
+    created_at:
+      type: string
+      format: date-time
+    updateded_at:
+      type: string
+      format: date-time
+    deleted_at:
+      type: string
+      format: date-time
+
+UserInput:
+  type: object
+  required:
+    - name
+    - email
+    - password
+  properties:
+    name:
+      type: string
+    email:
+      type: string
+    password:
+      type: string
