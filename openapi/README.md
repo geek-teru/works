@@ -1,14 +1,46 @@
 # OpenAPI の使い方
 
+### ER 図
+
+```mermaid
+erDiagram
+    User {
+        int id PK "ユーザーID"
+        varchar(100) name "名前"
+        varchar(100) email "メールアドレス"
+        varchar(100) password "パスワード"
+        timestamp created_at
+        timestamp updateded_at
+        timestamp deleted_at
+    }
+    Task {
+        int id PK "タスクID"
+        varchar(100) title "タイトル"
+        varchar(255) description "詳細"
+        date due_date "期限日"
+        int status "ステータス (e.g., TODO, IN_PROGRESS, DONE)"
+        int user_id FK "ユーザーID"
+        timestamp created_at
+        timestamp updateded_at
+        timestamp deleted_at
+    }
+
+
+    User ||--o{ Task : "1対多"
+```
+
 ## ローカルで Swagger UI を使う（Node.js 環境）
 
 ### 構成
 
 ```
-/swagger-ui/
+/swagger-ui/dist/
   ├── index.html（公式から取得）
   ├── swagger-initializer.js（YAMLパスを指定）
-  └── openapi.yaml
+  ├── openapi.yaml
+  └── components
+        ├── task.yaml
+        └── user.yaml
 ```
 
 ### 準備
