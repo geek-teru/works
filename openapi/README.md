@@ -31,6 +31,10 @@ erDiagram
 
 ## ローカルで Swagger UI を使う（Node.js 環境）
 
+### スクリーンショット
+
+![screenshot](images/screenshot-2025-04-18.png)
+
 ### 構成
 
 ```
