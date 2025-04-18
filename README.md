@@ -1,12 +1,14 @@
 ##　概要
-備忘用repository
+
+備忘用 repository
 
 ## 一覧
+
 ### AWS
-- 
-| 分類     | 項目 | 説明 |
-|----------|---------|---------|
-| AWS      | [Amplify](./AWS/Amplify/backend/README.md)   | Amplify gen2を用いたフロントエンド構築 |
-| AWS      | [Serverless]()   | AWS SAMを用いたbackend API構築 |
-| Cell5   | Cell6   | Cell7   | Cell8   |
-| Cell9   | Cell10  | Cell11  | Cell12  |
+
+- | 分類    | 項目                                       | 説明                                      |
+  | ------- | ------------------------------------------ | ----------------------------------------- |
+  | AWS     | [Amplify](./AWS/Amplify/backend/README.md) | Amplify gen2 を用いたフロントエンド構築   |
+  | AWS     | [Serverless]()                             | AWS SAM を用いた backend API 構築         |
+  | Go 言語 | [Echo]                                     | Echo で HelloWorld                        |
+  | OpenAPI | [OpenAPI](./openapi/README.md)             | OpenAPI で Restful API の定義、モック作成 |
