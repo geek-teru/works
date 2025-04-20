@@ -33,7 +33,7 @@ erDiagram
     User ||--o{ Task : "1対多"
 ```
 
-## ローカルで Swagger UI を使う（Node.js 環境）
+## ローカルで Swagger UI を使ってみた（Node.js 環境）
 
 ---
 
@@ -93,7 +93,7 @@ http-server
 
 - ブラウザで `http://127.0.0.1:8080/#/`を開く(キャッシュが残る可能性があるのでシークレットモードの方がいい)
 
-## Prism でモックサーバーを構築する
+## Prism でモックサーバーを構築してみる
 
 ---
 
@@ -157,3 +157,24 @@ $ curl -X POST http://localhost:4010/users \
 {"id":0,"name":"string","email":"string","password":"string","created_at":"2019-08-24T14:15:22Z","updateded_at":"2019-08-24T14:15:22Z","deleted_at":"2019-08-24T14:15:22Z"}
 
 ```
+
+## curl: (52) Empty reply from server エラー
+
+docker-compose.yml で以下のように定義して起動
+
+```
+prism mock openapi.yaml
+```
+
+- ホストから curl をたたくと以下エラーに遭遇
+
+```
+curl -X GET http://127.0.0.1:4010/users
+curl: (52) Empty reply from server
+```
+
+- `curl: (52) Empty reply from server` とはレスポンスが届かないこと。ポート自体は解放されている
+
+- 原因
+  - Prism はデフォルトで 127.0.0.1 にバインドされ、それ以外の IP を指定したリクエストは受け付けない。
+  - -h 0.0.0.0 オプションをつけることですべてのアドレスからのリクエストを受け付ける

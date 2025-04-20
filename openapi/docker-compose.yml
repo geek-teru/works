@@ -1,0 +1,10 @@
+version: "3"
+services:
+  prism:
+    build: .
+    container_name: prism.local
+    ports:
+      - "4010:4010"
+    volumes:
+      - ./mock:/app
+    command: prism mock -h 0.0.0.0 openapi.yaml

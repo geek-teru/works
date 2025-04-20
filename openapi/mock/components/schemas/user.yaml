@@ -20,6 +20,10 @@ User:
     deleted_at:
       type: string
       format: date-time
+  example:
+    id: 50
+    name: Alice
+    email: alice@example.com
 
 UserInput:
   type: object
